@@ -68,7 +68,7 @@ endif
 
 # Symlink /charger to /sbin/healthd
 LOCAL_POST_INSTALL_CMD := $(hide) mkdir -p $(TARGET_ROOT_OUT) \
-    && ln -sf /sbin/healthd $(TARGET_ROOT_OUT)/charger
+    && rm -f $(TARGET_ROOT_OUT)/charger && ln -sf /sbin/healthd $(TARGET_ROOT_OUT)/charger
 
 include $(BUILD_EXECUTABLE)
 
