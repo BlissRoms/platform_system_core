@@ -240,30 +240,46 @@ extern "C" {
  * Simplified macro to send a debug system log message using the current LOG_TAG.
  */
 #ifndef SLOGD
+#if LOG_NDEBUG
+#define SLOGD(...) ((void)0)
+#else
 #define SLOGD(...) \
     ((void)__android_log_buf_print(LOG_ID_SYSTEM, ANDROID_LOG_DEBUG, LOG_TAG, __VA_ARGS__))
 #endif
+#endif
 
 #ifndef SLOGD_IF
+#if LOG_NDEBUG
+#define SLOGD_IF(cond, ...) ((void)0)
+#else
 #define SLOGD_IF(cond, ...) \
     ( (__predict_false(cond)) \
     ? ((void)__android_log_buf_print(LOG_ID_SYSTEM, ANDROID_LOG_DEBUG, LOG_TAG, __VA_ARGS__)) \
     : (void)0 )
+#endif
 #endif
 
 /*
  * Simplified macro to send an info system log message using the current LOG_TAG.
  */
 #ifndef SLOGI
+#if LOG_NDEBUG
+#define SLOGI(...) ((void)0)
+#else
 #define SLOGI(...) \
     ((void)__android_log_buf_print(LOG_ID_SYSTEM, ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__))
 #endif
+#endif
 
 #ifndef SLOGI_IF
+#if LOG_NDEBUG
+#define SLOGI_IF(cond, ...) ((void)0)
+#else
 #define SLOGI_IF(cond, ...) \
     ( (__predict_false(cond)) \
     ? ((void)__android_log_buf_print(LOG_ID_SYSTEM, ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)) \
     : (void)0 )
+#endif
 #endif
 
 /*
