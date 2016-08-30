@@ -90,11 +90,19 @@ static Result<std::string> ComputeContextFromExecutable(const std::string& servi
         free(new_con);
     }
     if (rc == 0 && computed_context == mycon.get()) {
-        return Error() << "File " << service_path << "(labeled \"" << filecon.get()
+        if (selinux_status_getenforce() > 0) {
+            return Error() << "File " << service_path << "(labeled \"" << filecon.get()
+                           << "\") has incorrect label or no domain transition from " << mycon.get()
+                           << " to another SELinux domain defined. Have you configured your "
+                              "service correctly? https://source.android.com/security/selinux/"
+                              "device-policy#label_new_services_and_address_denials";
+        }else{
+            LOG(ERROR) << "File " << service_path << "(labeled \"" << filecon.get()
                        << "\") has incorrect label or no domain transition from " << mycon.get()
                        << " to another SELinux domain defined. Have you configured your "
                           "service correctly? https://source.android.com/security/selinux/"
                           "device-policy#label_new_services_and_address_denials";
+        }
     }
     if (rc < 0) {
         return Error() << "Could not get process context";
