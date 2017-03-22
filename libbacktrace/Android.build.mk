@@ -41,6 +41,9 @@ LOCAL_CFLAGS += \
     $($(module)_cflags) \
     $($(module)_cflags_$(build_type)) \
 
+# Because of aliasing violations in libunwind headers for aarch64
+LOCAL_CFLAGS_arm64 += -fno-strict-aliasing
+
 LOCAL_CLANG_CFLAGS += \
     $(libbacktrace_common_clang_cflags) \
 
