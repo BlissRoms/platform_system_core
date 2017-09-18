@@ -37,7 +37,7 @@ using namespace android;
 
 #ifndef BOARD_PERIODIC_CHORES_INTERVAL_FAST
   // Periodic chores fast interval in seconds
-  #define DEFAULT_PERIODIC_CHORES_INTERVAL_FAST (60 * 1)
+  #define DEFAULT_PERIODIC_CHORES_INTERVAL_FAST (60 * 10)
 #else
   #define DEFAULT_PERIODIC_CHORES_INTERVAL_FAST (BOARD_PERIODIC_CHORES_INTERVAL_FAST)
 #endif
