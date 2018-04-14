@@ -348,7 +348,7 @@ Mutex::Mutex()
     mState = (void*) hMutex;
 }
 
-Mutex::Mutex(const char* name)
+Mutex::Mutex(const char* /*name*/)
 {
     // XXX: name not used for now
     HANDLE hMutex;
@@ -359,7 +359,7 @@ Mutex::Mutex(const char* name)
     mState = (void*) hMutex;
 }
 
-Mutex::Mutex(int type, const char* name)
+Mutex::Mutex(int /*type*/, const char* /*name*/)
 {
     // XXX: type and name not used for now
     HANDLE hMutex;
@@ -661,7 +661,10 @@ status_t Thread::readyToRun()
 
 status_t Thread::run(const char* name, int32_t priority, size_t stack)
 {
-    LOG_ALWAYS_FATAL_IF(name == nullptr, "thread name not provided to Thread::run");
+    if (name == nullptr) {
+        ALOGW("Thread name not provided to Thread::run");
+        name = 0;
+    }
 
     Mutex::Autolock _l(mLock);
 

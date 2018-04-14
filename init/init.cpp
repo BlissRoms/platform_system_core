@@ -822,7 +822,7 @@ static bool selinux_load_split_policy() {
     const char* compile_args[] = {
         "/system/bin/secilc",
         plat_policy_cil_file,
-        "-M", "true", "-G", "-N",
+        "-m", "-M", "true", "-G", "-N",
         // Target the highest policy language version supported by the kernel
         "-c", version_as_string.c_str(),
         mapping_file.c_str(),
@@ -939,6 +939,9 @@ static void selinux_restore_context() {
 
     selinux_android_restorecon("/sbin/mke2fs_static", 0);
     selinux_android_restorecon("/sbin/e2fsdroid_static", 0);
+
+    selinux_android_restorecon("/sbin/mkfs.f2fs", 0);
+    selinux_android_restorecon("/sbin/sload.f2fs", 0);
 }
 
 // Set the UDC controller for the ConfigFS USB Gadgets.
