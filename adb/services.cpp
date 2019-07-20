@@ -94,7 +94,7 @@ void restart_root_service(int fd, void *cookie) {
             return;
         }
 
-        android::base::SetProperty("lineage.service.adb.root", "1");
+        android::base::SetProperty("bliss.service.adb.root", "1");
         WriteFdExactly(fd, "restarting adbd as root\n");
         adb_close(fd);
     }
@@ -105,7 +105,7 @@ void restart_unroot_service(int fd, void *cookie) {
         WriteFdExactly(fd, "adbd not running as root\n");
         adb_close(fd);
     } else {
-        android::base::SetProperty("lineage.service.adb.root", "0");
+        android::base::SetProperty("bliss.service.adb.root", "0");
         WriteFdExactly(fd, "restarting adbd as non root\n");
         adb_close(fd);
     }
