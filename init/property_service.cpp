@@ -801,7 +801,6 @@ static const char *snet_prop_key[] = {
     "ro.boot.selinux",
     "ro.boot.warranty_bit",
     "ro.warranty_bit",
-    "ro.debuggable",
     "ro.secure",
     "ro.build.type",
     "ro.system.build.type",
@@ -821,7 +820,6 @@ static const char *snet_prop_value[] = {
     "enforcing", // ro.boot.selinux
     "0", // ro.boot.warranty_bit
     "0", // ro.warranty_bit
-    "0", // ro.debuggable
     "1", // ro.secure
     "user", // ro.build.type
     "user", // ro.system.build.type
