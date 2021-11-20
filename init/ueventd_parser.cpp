@@ -230,7 +230,7 @@ Result<void> SubsystemParser::EndSection() {
     return {};
 }
 
-UeventdConfiguration ParseConfig(const std::vector<std::string>& configs) {
+UeventdConfiguration ParseConfig(const std::string& config) {
     Parser parser;
     UeventdConfiguration ueventd_configuration;
 
@@ -260,9 +260,7 @@ UeventdConfiguration ParseConfig(const std::vector<std::string>& configs) {
                                std::bind(ParseEnabledDisabledLine, _1,
                                          &ueventd_configuration.enable_parallel_restorecon));
 
-    for (const auto& config : configs) {
-        parser.ParseConfig(config);
-    }
+    parser.ParseConfig(config);
 
     return ueventd_configuration;
 }
