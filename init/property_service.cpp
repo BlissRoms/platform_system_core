@@ -957,9 +957,6 @@ static void workaround_snet_properties() {
         PropertySetNoSocket(snet_prop_key[i], snet_prop_value[i], &error);
     }
 
-    chmod("/sys/fs/selinux/enforce", 0640);
-    chmod("/sys/fs/selinux/policy", 0440);
-
     // Extra pops
     std::string build_flavor_key = "ro.build.flavor";
     std::string build_flavor_value = android::base::GetProperty(build_flavor_key, "");
