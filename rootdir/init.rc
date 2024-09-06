@@ -690,6 +690,16 @@ on late-fs
     # HALs required before storage encryption can get unlocked (FBE)
     class_start early_hal
 
+# Only enable the bootreceiver tracing instance for kernels 5.10 and above.
+on late-fs && property:ro.kernel.version=4.9
+    setprop bootreceiver.enable 0
+on late-fs && property:ro.kernel.version=4.14
+    setprop bootreceiver.enable 0
+on late-fs && property:ro.kernel.version=4.19
+    setprop bootreceiver.enable 0
+on late-fs && property:ro.kernel.version=5.4
+    setprop bootreceiver.enable 0
+
 # Don't enable the bootreceiver tracing instance to save 10MB of memory
 on late-fs
     setprop bootreceiver.enable 0
