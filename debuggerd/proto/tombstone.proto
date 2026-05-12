@@ -22,6 +22,7 @@ message CrashDetail {
 
 message Tombstone {
   Architecture arch = 1;
+  string lineage_version = 1000;
   string build_fingerprint = 2;
   string revision = 3;
   string timestamp = 4;
