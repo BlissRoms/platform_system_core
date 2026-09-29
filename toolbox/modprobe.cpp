@@ -306,7 +306,9 @@ extern "C" int modprobe_main(int argc, char** argv) {
 
     Modprobe m(mod_dirs, modules_load_file.empty() ? "modules.load" : modules_load_file, blocklist);
     if (mode == AddModulesMode && !modules_load_file.empty()) {
-        bool retval = (parallel) ? m.LoadModulesParallel(std::thread::hardware_concurrency())
+        bool retval = (parallel) ? m.LoadModulesParallel(std::thread::hardware_concurrency(),
+                                                         Modprobe::LoadParallelMode::NORMAL,
+                                                         false)
                                  : m.LoadListedModules(false);
 
         if (!retval) {
